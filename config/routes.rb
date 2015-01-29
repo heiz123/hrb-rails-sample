@@ -1,8 +1,27 @@
 Rails.application.routes.draw do
 
-  get 'welcome/index'
+  resources :users
 
-  root 'welcome#index'
+  namespace :user do
+    get 'session/show'
+  end
+
+  namespace :user do
+    get 'session/new'
+  end
+
+  namespace :user do
+    get :sign_in, to: 'session#new'
+    post :sign_in, to: 'session#create'
+    delete :sign_out, to: 'session#destroy'
+  end
+
+  root 'user/session#show'
+
+
+  # get 'welcome/index'
+
+  # root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
